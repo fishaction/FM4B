@@ -10,16 +10,14 @@ using System.Windows.Forms;
 
 namespace FileManager4Broadcasting
 {
-    public partial class Home : Form
+    public partial class DupFilesForm : Form
     {
-        public Home()
+        public DupFilesForm()
         {
             InitializeComponent();
         }
 
-        private void exitItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        
+
     }
 }
