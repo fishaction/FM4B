@@ -21,5 +21,10 @@ namespace FileManager4Broadcasting
         {
             Close();
         }
+
+        private void optionItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
