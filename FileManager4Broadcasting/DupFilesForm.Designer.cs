@@ -56,6 +56,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);
             this.Name = "DupFilesForm";
+            this.Load += new System.EventHandler(this.DupFilesForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

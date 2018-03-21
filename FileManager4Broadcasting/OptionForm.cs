@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace FileManager4Broadcasting
 {
-    public partial class Home : Form
+    public partial class OptionForm : Form
     {
-        public Home()
+        public OptionForm()
         {
             InitializeComponent();
-        }
-
-        private void exitItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void optionItem_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

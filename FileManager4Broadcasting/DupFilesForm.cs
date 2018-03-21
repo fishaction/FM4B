@@ -12,12 +12,17 @@ namespace FileManager4Broadcasting
 {
     public partial class DupFilesForm : Form
     {
+        public Home home = new Home();
+
         public DupFilesForm()
         {
             InitializeComponent();
         }
 
-        
-
+        private void DupFilesForm_Load(object sender, EventArgs e)
+        {
+            foreach (string s in home.filePaths)
+                MessageBox.Show(s);
+        }
     }
 }

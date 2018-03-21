@@ -54,13 +54,13 @@
             this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitItem});
             this.fileMenu.Name = "fileMenu";
-            this.fileMenu.Size = new System.Drawing.Size(85, 24);
+            this.fileMenu.Size = new System.Drawing.Size(67, 24);
             this.fileMenu.Text = "ファイル(&F)";
             // 
             // exitItem
             // 
             this.exitItem.Name = "exitItem";
-            this.exitItem.Size = new System.Drawing.Size(118, 22);
+            this.exitItem.Size = new System.Drawing.Size(113, 22);
             this.exitItem.Text = "終了(&X)";
             this.exitItem.Click += new System.EventHandler(this.exitItem_Click);
             // 
@@ -69,7 +69,7 @@
             this.toolMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionItem});
             this.toolMenu.Name = "toolMenu";
-            this.toolMenu.Size = new System.Drawing.Size(74, 24);
+            this.toolMenu.Size = new System.Drawing.Size(60, 24);
             this.toolMenu.Text = "ツール(&T)";
             // 
             // optionItem
@@ -81,6 +81,7 @@
             // 
             // Home
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
@@ -88,6 +89,8 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Home";
             this.Text = "FileManager4Broadcasting";
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Home_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Home_DragEnter);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
