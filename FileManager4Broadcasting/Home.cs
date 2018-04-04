@@ -57,5 +57,11 @@ namespace FileManager4Broadcasting
                 e.Effect = DragDropEffects.None;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form testform = new ImportForm();
+            testform.Show();
+        }
     }
 }
