@@ -29,6 +29,10 @@ namespace FileManager4Broadcasting
             childTestNode1.Text = "子テストノード1";
             TreeNode childTestNode2 = new TreeNode();
             childTestNode2.Text = "子テストノード2";
+            TreeNode childTestNode3 = new TreeNode();
+            childTestNode3.Text = "子テストノード3";
+            TreeNode childTestNode4 = new TreeNode();
+            childTestNode4.Text = "子テストノード4";
 
             treeView1.Nodes.Add(rootNode);
             rootNode.Nodes.Add(testNode1);
@@ -36,8 +40,8 @@ namespace FileManager4Broadcasting
             testNode1.Nodes.Add(childTestNode1);
             testNode1.Nodes.Add(childTestNode2);
 
-            testNode2.Nodes.Add(childTestNode1);
-            testNode2.Nodes.Add(childTestNode2);
+            testNode2.Nodes.Add(childTestNode3);
+            childTestNode3.Nodes.Add(childTestNode4);
 
             
         }
@@ -47,19 +51,18 @@ namespace FileManager4Broadcasting
             MessageBox.Show(sender.GetType().ToString());
         }
 
-        private TreeNode[] GetAllChild(TreeNode basetn)
+        private List<TreeNode> GetAllChild(TreeNodeCollection Nodes)
         {
-
-            int count = 0;
-            TreeNode[] treeNodes = null;
-
-            foreach (TreeNode tn in basetn.Nodes)
+            List<TreeNode> ar = new List<TreeNode>();
+            foreach (TreeNode node in Nodes)
             {
-                if(tn.Nodes.Count != 0)
+                ar.Add(node);
+                if (node.GetNodeCount(false) > 0)
                 {
-                    
+                    ar.AddRange(GetAllChild(node.Nodes));
                 }
             }
+            return ar;
         }
 
         private void ImportForm_Shown(object sender, EventArgs e)
@@ -69,7 +72,7 @@ namespace FileManager4Broadcasting
 
         private void button1_Click(object sender, EventArgs e)
         {
-            foreach (TreeNode tn in GetAllChild(rootNode))
+            foreach (TreeNode tn in GetAllChild(rootNode.Nodes))
             {
 
                 MessageBox.Show(tn.Text);
