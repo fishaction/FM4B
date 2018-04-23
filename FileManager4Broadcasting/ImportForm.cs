@@ -78,5 +78,24 @@ namespace FileManager4Broadcasting
                 MessageBox.Show(tn.Text);
             }
         }
+
+        private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+
+            TreeNode root = treeView1.Nodes[0];
+
+            foreach (TreeNode tn in GetAllChild(e.Node.Nodes))
+            {
+                tn.Checked = e.Node.Checked;
+            }
+
+            if (e.Node != root)
+            {
+                if (e.Node.Parent.Nodes.Count == 1)
+                {
+                    e.Node.Parent.Checked = e.Node.Checked;
+                }
+            }
+        }
     }
 }
