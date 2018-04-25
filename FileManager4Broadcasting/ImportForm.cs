@@ -31,7 +31,6 @@ namespace FileManager4Broadcasting
         {
             
         }
-
         /*未実装
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
         {
