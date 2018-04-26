@@ -60,8 +60,11 @@ namespace FileManager4Broadcasting
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form testform = new ImportForm();
-            testform.Show();
+            ImportForm importForm = new ImportForm();
+            if (importForm.ShowDialog() == DialogResult.OK)
+            {
+                
+            }
         }
     }
 }

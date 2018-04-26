@@ -31,39 +31,63 @@ namespace FileManager4Broadcasting
         {
             
         }
-        /*未実装
-        private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
+
+        private void button4_Click(object sender, EventArgs e)
         {
-
-            TreeNode root = treeView1.Nodes[0];
-
-            foreach (TreeNode tn in GetAllChild(e.Node.Nodes))
-            {
-                tn.Checked = e.Node.Checked;
-            }
-
-            if (e.Node != root)
-            {
-                if (e.Node.Parent.Nodes.Count == 1)
-                {
-                    e.Node.Parent.Checked = e.Node.Checked;
-                }
-                MessageBox.Show("test");
-            }
+            Close();
         }
 
-        private List<TreeNode> GetAllChild(TreeNodeCollection Nodes)
+        private void listBox1_DragDrop(object sender, DragEventArgs e)
         {
-            List<TreeNode> ar = new List<TreeNode>();
-            foreach (TreeNode node in Nodes)
-            {
-                ar.Add(node);
-                if (node.GetNodeCount(false) > 0)
-                {
-                    ar.AddRange(GetAllChild(node.Nodes));
-                }
-            }
-            return ar;
-        }*/
+            string[] fileName =
+                    (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            //ListBoxに追加する
+            listBox1.Items.AddRange(fileName);
+        }
+
+        private void listBox1_DragEnter(object sender, DragEventArgs e)
+        {
+            //コントロール内にドラッグされたとき実行される
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                //ドラッグされたデータ形式を調べ、ファイルのときはコピーとする
+                e.Effect = DragDropEffects.Copy;
+            else
+                //ファイル以外は受け付けない
+                e.Effect = DragDropEffects.None;
+        }
+        /*未実装
+private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
+{
+
+TreeNode root = treeView1.Nodes[0];
+
+foreach (TreeNode tn in GetAllChild(e.Node.Nodes))
+{
+tn.Checked = e.Node.Checked;
+}
+
+if (e.Node != root)
+{
+if (e.Node.Parent.Nodes.Count == 1)
+{
+e.Node.Parent.Checked = e.Node.Checked;
+}
+MessageBox.Show("test");
+}
+}
+
+private List<TreeNode> GetAllChild(TreeNodeCollection Nodes)
+{
+List<TreeNode> ar = new List<TreeNode>();
+foreach (TreeNode node in Nodes)
+{
+ar.Add(node);
+if (node.GetNodeCount(false) > 0)
+{
+ar.AddRange(GetAllChild(node.Nodes));
+}
+}
+return ar;
+}*/
     }
 }
