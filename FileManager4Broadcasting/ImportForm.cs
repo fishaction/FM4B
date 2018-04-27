@@ -7,16 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace FileManager4Broadcasting
 {
     public partial class ImportForm : Form
     {
+
+        private string[] files;
+        private string[] filePaths;
+        private string[] fileExts;
+
         public ImportForm()
         {
             InitializeComponent();
         }
         TreeNode rootNode = new TreeNode();
+        
         private void ImportForm_Load(object sender, EventArgs e)
         {
             
@@ -41,8 +48,17 @@ namespace FileManager4Broadcasting
         {
             string[] fileName =
                     (string[])e.Data.GetData(DataFormats.FileDrop, false);
-            //ListBoxに追加する
-            listBox1.Items.AddRange(fileName);
+            foreach (string f in fileName)
+            {
+                filePaths[filePaths.Length] = f;
+            }
+            UpdateListBox();
+        }
+
+        private void UpdateListBox()
+        {
+            listBox1.Items.Clear();
+            listBox1.Items.Add(files);
         }
 
         private void listBox1_DragEnter(object sender, DragEventArgs e)
