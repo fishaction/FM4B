@@ -14,9 +14,9 @@ namespace FileManager4Broadcasting
     public partial class ImportForm : Form
     {
 
-        private string[] files;
-        private string[] filePaths;
-        private string[] fileExts;
+        private string[] files = new string[0];
+        private string[] filePaths = new string[0];
+        private string[] fileExts = new string[0];
 
         public ImportForm()
         {
@@ -48,17 +48,26 @@ namespace FileManager4Broadcasting
         {
             string[] fileName =
                     (string[])e.Data.GetData(DataFormats.FileDrop, false);
-            foreach (string f in fileName)
+            for(int i = 0; i < fileName.Length; i++)
             {
-                filePaths[filePaths.Length] = f;
+                Array.Resize(ref filePaths, filePaths.Length + 1);
+                Array.Resize(ref files, files.Length + 1);
+                Array.Resize(ref fileExts, fileExts.Length + 1);
+                filePaths[filePaths.Length - 1] = fileName[i];
+                files[files.Length - 1] = Path.GetFileNameWithoutExtension(fileName[i]);
+                fileExts[files.Length - 1] = Path.GetFileName(fileName[i]);
             }
+            //MessageBox.Show(filePaths.Length.ToString());
             UpdateListBox();
         }
 
         private void UpdateListBox()
         {
             listBox1.Items.Clear();
-            listBox1.Items.Add(files);
+            for (int i = 0;i < filePaths.Length;i++)
+            {
+                listBox1.Items.Add(files[i] + fileExts[i]);
+            }
         }
 
         private void listBox1_DragEnter(object sender, DragEventArgs e)
