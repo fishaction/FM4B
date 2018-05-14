@@ -66,5 +66,11 @@ namespace FileManager4Broadcasting
                 
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            PreviewForm pf = new PreviewForm();
+            pf.Show();
+        }
     }
 }
