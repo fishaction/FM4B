@@ -17,7 +17,6 @@ namespace FileManager4Broadcasting
             InitializeComponent();
             axWindowsMediaPlayer1.uiMode = "none";
             axWindowsMediaPlayer1.settings.autoStart = true;
-            
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -25,47 +24,29 @@ namespace FileManager4Broadcasting
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            //timer1.Enabled = false;
-            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = trackBar1.Value / 1000;
-            double d = trackBar1.Value;
-            d = d / 1000;
-            MessageBox.Show(d.ToString());
-            axWindowsMediaPlayer1.Ctlcontrols.pause();
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
-            double d = axWindowsMediaPlayer1.Ctlcontrols.currentPosition * 1000;
-            int i = (int)d;
-            trackBar1.Value = i;
+            toolStripLabel1.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
         }
 
         private void axWindowsMediaPlayer1_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
         {
-            //trackBar1.Maximum = (int)axWindowsMediaPlayer1.currentMedia.duration * 1000;
-            double d = axWindowsMediaPlayer1.currentMedia.duration * 1000;
-            int i = (int)d;
-            trackBar1.Maximum = i;
+            
         }
 
-        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.Ctlcontrols.play();
-            //timer1.Enabled = true;
         }
 
-        private void trackBar1_MouseDown(object sender, MouseEventArgs e)
+        private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = trackBar1.Value / 1000;
-            
             axWindowsMediaPlayer1.Ctlcontrols.pause();
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            axWindowsMediaPlayer1.Ctlcontrols.stop();
         }
     }
 }
