@@ -21,6 +21,9 @@ namespace FileManager4Broadcasting
         public ImportForm()
         {
             InitializeComponent();
+            inportButton.Enabled = false;
+            inportCancelButton.Enabled = false;
+            previewButton.Enabled = false;
         }
         TreeNode rootNode = new TreeNode();
         
@@ -48,7 +51,8 @@ namespace FileManager4Broadcasting
         {
             string[] fileName =
                     (string[])e.Data.GetData(DataFormats.FileDrop, false);
-            for(int i = 0; i < fileName.Length; i++)
+
+            for (int i = 0; i < fileName.Length; i++)
             {
                 Array.Resize(ref filePaths, filePaths.Length + 1);
                 Array.Resize(ref files, files.Length + 1);
@@ -66,7 +70,7 @@ namespace FileManager4Broadcasting
             listBox1.Items.Clear();
             for (int i = 0;i < filePaths.Length;i++)
             {
-                listBox1.Items.Add(files[i] + fileExts[i]);
+                listBox1.Items.Add(fileExts[i]);
             }
         }
 
@@ -84,10 +88,45 @@ namespace FileManager4Broadcasting
         private void button3_Click(object sender, EventArgs e)
         {
             PreviewForm previewForm = new PreviewForm();
+            int n = 0;
+            for (int i = 0;i<listBox1.Items.Count;i++)
+            {
+                if (listBox1.Items[i] == listBox1.SelectedItems[0])
+                {
+                    n = i;
+                }
+            }
+
+            previewForm.fileUrl = filePaths[n];
+            //MessageBox.Show(filePaths[n]);
+            //previewForm.fileUrl = filePaths[n] ;
+            
             if (previewForm.ShowDialog() == DialogResult.OK)
             {
-
+                
             }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show(listBox1.SelectedIndices.ToString());
+            if (listBox1.SelectedItems.Count == 1)
+            {
+                previewButton.Enabled = true;
+            }
+            else
+                previewButton.Enabled = false;
+            if (listBox1.SelectedItems.Count >= 1)
+            {
+                inportButton.Enabled = true;
+                inportCancelButton.Enabled = true;
+            }
+            else
+            {
+                inportButton.Enabled = false;
+                inportCancelButton.Enabled = false;
+            }
+            
         }
         /*未実装
 private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)

@@ -14,12 +14,20 @@ namespace FileManager4Broadcasting
     {
 
         int playSecs;
+        public string fileUrl;
+        
 
         public PreviewForm()
         {
             InitializeComponent();
             axWindowsMediaPlayer1.uiMode = "none";
+            //axWindowsMediaPlayer1.URL = @"C:\Users\Owner\Desktop\00073.MTS";
             axWindowsMediaPlayer1.settings.autoStart = true;
+        }
+
+        private void PreviewForm_Load(object sender, EventArgs e)
+        {
+            
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -76,6 +84,11 @@ namespace FileManager4Broadcasting
             axWindowsMediaPlayer1.Ctlcontrols.currentPosition = trackBar1.Value;
             axWindowsMediaPlayer1.Ctlcontrols.play();
             timer1.Enabled = true;
+        }
+
+        private void PreviewForm_Shown(object sender, EventArgs e)
+        {
+
         }
     }
 }
