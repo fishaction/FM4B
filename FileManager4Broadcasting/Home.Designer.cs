@@ -56,13 +56,13 @@
             this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitItem});
             this.fileMenu.Name = "fileMenu";
-            this.fileMenu.Size = new System.Drawing.Size(85, 24);
+            this.fileMenu.Size = new System.Drawing.Size(67, 24);
             this.fileMenu.Text = "ファイル(&F)";
             // 
             // exitItem
             // 
             this.exitItem.Name = "exitItem";
-            this.exitItem.Size = new System.Drawing.Size(118, 22);
+            this.exitItem.Size = new System.Drawing.Size(113, 22);
             this.exitItem.Text = "終了(&X)";
             this.exitItem.Click += new System.EventHandler(this.exitItem_Click);
             // 
@@ -71,13 +71,13 @@
             this.toolMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionItem});
             this.toolMenu.Name = "toolMenu";
-            this.toolMenu.Size = new System.Drawing.Size(74, 24);
+            this.toolMenu.Size = new System.Drawing.Size(60, 24);
             this.toolMenu.Text = "ツール(&T)";
             // 
             // optionItem
             // 
             this.optionItem.Name = "optionItem";
-            this.optionItem.Size = new System.Drawing.Size(155, 22);
+            this.optionItem.Size = new System.Drawing.Size(135, 22);
             this.optionItem.Text = "オプション(&O)";
             this.optionItem.Click += new System.EventHandler(this.optionItem_Click);
             // 

@@ -80,6 +80,15 @@ namespace FileManager4Broadcasting
                 //ファイル以外は受け付けない
                 e.Effect = DragDropEffects.None;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            PreviewForm previewForm = new PreviewForm();
+            if (previewForm.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+        }
         /*未実装
 private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
 {

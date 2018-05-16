@@ -12,6 +12,9 @@ namespace FileManager4Broadcasting
 {
     public partial class PreviewForm : Form
     {
+
+        int playSecs;
+
         public PreviewForm()
         {
             InitializeComponent();
@@ -19,19 +22,32 @@ namespace FileManager4Broadcasting
             axWindowsMediaPlayer1.settings.autoStart = true;
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-            
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             toolStripLabel1.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
+            if (trackBar1.Maximum >(int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition)
+            {
+                trackBar1.Value = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
+            }
+            else
+            {
+                trackBar1.Maximum = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
+                trackBar1.Value = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
+            }
         }
 
         private void axWindowsMediaPlayer1_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
         {
-            
+            playSecs = (int)axWindowsMediaPlayer1.currentMedia.duration;
+            trackBar1.Maximum = playSecs;
+            if (axWindowsMediaPlayer1.Ctlcontrols.currentItem.imageSourceHeight == 0)
+            {
+                axWindowsMediaPlayer1.uiMode = "invisible";
+                tableLayoutPanel1.RowStyles[0].SizeType = SizeType.Absolute;
+                tableLayoutPanel1.RowStyles[0].Height = 0;
+                Height = 100;
+                Width = 300;
+            }
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -47,6 +63,19 @@ namespace FileManager4Broadcasting
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.Ctlcontrols.stop();
+        }
+
+        private void trackBar1_MouseDown(object sender, MouseEventArgs e)
+        {
+            axWindowsMediaPlayer1.Ctlcontrols.pause();
+            timer1.Enabled = false;
+        }
+
+        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        {
+            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = trackBar1.Value;
+            axWindowsMediaPlayer1.Ctlcontrols.play();
+            timer1.Enabled = true;
         }
     }
 }
