@@ -160,7 +160,6 @@
             this.Name = "PreviewForm";
             this.Text = "PreviewForm";
             this.Load += new System.EventHandler(this.PreviewForm_Load);
-            this.Shown += new System.EventHandler(this.PreviewForm_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();

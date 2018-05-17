@@ -21,13 +21,15 @@ namespace FileManager4Broadcasting
         {
             InitializeComponent();
             axWindowsMediaPlayer1.uiMode = "none";
-            //axWindowsMediaPlayer1.URL = @"C:\Users\Owner\Desktop\00073.MTS";
             axWindowsMediaPlayer1.settings.autoStart = true;
+            
         }
 
         private void PreviewForm_Load(object sender, EventArgs e)
         {
-            
+            axWindowsMediaPlayer1.Ctlcontrols.stop();
+            axWindowsMediaPlayer1.URL = fileUrl;
+            MessageBox.Show(axWindowsMediaPlayer1.URL);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -46,15 +48,22 @@ namespace FileManager4Broadcasting
 
         private void axWindowsMediaPlayer1_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
         {
-            playSecs = (int)axWindowsMediaPlayer1.currentMedia.duration;
-            trackBar1.Maximum = playSecs;
-            if (axWindowsMediaPlayer1.Ctlcontrols.currentItem.imageSourceHeight == 0)
+            switch (e.newState)
             {
-                axWindowsMediaPlayer1.uiMode = "invisible";
-                tableLayoutPanel1.RowStyles[0].SizeType = SizeType.Absolute;
-                tableLayoutPanel1.RowStyles[0].Height = 0;
-                Height = 100;
-                Width = 300;
+                case 3:
+                    {
+                        playSecs = (int)axWindowsMediaPlayer1.currentMedia.duration;
+                        trackBar1.Maximum = playSecs;
+                        if (axWindowsMediaPlayer1.Ctlcontrols.currentItem.imageSourceHeight == 0)
+                        {
+                            axWindowsMediaPlayer1.uiMode = "invisible";
+                            tableLayoutPanel1.RowStyles[0].SizeType = SizeType.Absolute;
+                            tableLayoutPanel1.RowStyles[0].Height = 0;
+                            Height = 100;
+                            Width = 300;
+                        }
+                        break;
+                    }
             }
         }
 
@@ -84,11 +93,6 @@ namespace FileManager4Broadcasting
             axWindowsMediaPlayer1.Ctlcontrols.currentPosition = trackBar1.Value;
             axWindowsMediaPlayer1.Ctlcontrols.play();
             timer1.Enabled = true;
-        }
-
-        private void PreviewForm_Shown(object sender, EventArgs e)
-        {
-
         }
     }
 }

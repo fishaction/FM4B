@@ -18,10 +18,12 @@ namespace FileManager4Broadcasting
         private string[] filePaths = new string[0];
         private string[] fileExts = new string[0];
 
+        private Dictionary<string, string> importFilesDictionary = new Dictionary<string, string>();
+
         public ImportForm()
         {
             InitializeComponent();
-            inportButton.Enabled = false;
+            importButton.Enabled = false;
             inportCancelButton.Enabled = false;
             previewButton.Enabled = false;
         }
@@ -52,14 +54,19 @@ namespace FileManager4Broadcasting
             string[] fileName =
                     (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
-            for (int i = 0; i < fileName.Length; i++)
+            AddItems(fileName);
+        }
+
+        private void AddItems(string[] fileNames)
+        {
+            for (int i = 0; i < fileNames.Length; i++)
             {
                 Array.Resize(ref filePaths, filePaths.Length + 1);
                 Array.Resize(ref files, files.Length + 1);
                 Array.Resize(ref fileExts, fileExts.Length + 1);
-                filePaths[filePaths.Length - 1] = fileName[i];
-                files[files.Length - 1] = Path.GetFileNameWithoutExtension(fileName[i]);
-                fileExts[files.Length - 1] = Path.GetFileName(fileName[i]);
+                filePaths[filePaths.Length - 1] = fileNames[i];
+                files[files.Length - 1] = Path.GetFileNameWithoutExtension(fileNames[i]);
+                fileExts[files.Length - 1] = Path.GetFileName(fileNames[i]);
             }
             //MessageBox.Show(filePaths.Length.ToString());
             UpdateListBox();
@@ -70,7 +77,7 @@ namespace FileManager4Broadcasting
             listBox1.Items.Clear();
             for (int i = 0;i < filePaths.Length;i++)
             {
-                listBox1.Items.Add(fileExts[i]);
+                listBox1.Items.Add(fileExts[i]+"("+filePaths[i]+")");
             }
         }
 
@@ -98,6 +105,7 @@ namespace FileManager4Broadcasting
             }
 
             previewForm.fileUrl = filePaths[n];
+            MessageBox.Show(filePaths[n]);
             //MessageBox.Show(filePaths[n]);
             //previewForm.fileUrl = filePaths[n] ;
             
@@ -118,49 +126,36 @@ namespace FileManager4Broadcasting
                 previewButton.Enabled = false;
             if (listBox1.SelectedItems.Count >= 1)
             {
-                inportButton.Enabled = true;
+                importButton.Enabled = true;
                 inportCancelButton.Enabled = true;
             }
             else
             {
-                inportButton.Enabled = false;
+                importButton.Enabled = false;
                 inportCancelButton.Enabled = false;
             }
             
         }
-        /*未実装
-private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
-{
 
-TreeNode root = treeView1.Nodes[0];
-
-foreach (TreeNode tn in GetAllChild(e.Node.Nodes))
-{
-tn.Checked = e.Node.Checked;
-}
-
-if (e.Node != root)
-{
-if (e.Node.Parent.Nodes.Count == 1)
-{
-e.Node.Parent.Checked = e.Node.Checked;
-}
-MessageBox.Show("test");
-}
-}
-
-private List<TreeNode> GetAllChild(TreeNodeCollection Nodes)
-{
-List<TreeNode> ar = new List<TreeNode>();
-foreach (TreeNode node in Nodes)
-{
-ar.Add(node);
-if (node.GetNodeCount(false) > 0)
-{
-ar.AddRange(GetAllChild(node.Nodes));
-}
-}
-return ar;
-}*/
+        private void importButton_Click(object sender, EventArgs e)
+        {
+            foreach(string s in listBox1.SelectedItems)
+            {
+                int n = 0;
+                for (int i = 0;i<listBox1.Items.Count;i++)
+                {
+                    if ((string)listBox1.Items[i] == s)
+                    {
+                        n = i;
+                    }
+                }
+                importFilesDictionary.Add(filePaths[n],s);
+            }
+            listBox2.Items.Clear();
+            foreach(string s in importFilesDictionary.Values)
+            {
+                listBox2.Items.Add(s);
+            }
+        }
     }
 }

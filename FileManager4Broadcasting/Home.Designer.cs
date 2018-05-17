@@ -34,7 +34,6 @@
             this.toolMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.optionItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,13 +55,13 @@
             this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitItem});
             this.fileMenu.Name = "fileMenu";
-            this.fileMenu.Size = new System.Drawing.Size(67, 24);
+            this.fileMenu.Size = new System.Drawing.Size(85, 24);
             this.fileMenu.Text = "ファイル(&F)";
             // 
             // exitItem
             // 
             this.exitItem.Name = "exitItem";
-            this.exitItem.Size = new System.Drawing.Size(113, 22);
+            this.exitItem.Size = new System.Drawing.Size(118, 22);
             this.exitItem.Text = "終了(&X)";
             this.exitItem.Click += new System.EventHandler(this.exitItem_Click);
             // 
@@ -71,13 +70,13 @@
             this.toolMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionItem});
             this.toolMenu.Name = "toolMenu";
-            this.toolMenu.Size = new System.Drawing.Size(60, 24);
+            this.toolMenu.Size = new System.Drawing.Size(74, 24);
             this.toolMenu.Text = "ツール(&T)";
             // 
             // optionItem
             // 
             this.optionItem.Name = "optionItem";
-            this.optionItem.Size = new System.Drawing.Size(135, 22);
+            this.optionItem.Size = new System.Drawing.Size(155, 22);
             this.optionItem.Text = "オプション(&O)";
             this.optionItem.Click += new System.EventHandler(this.optionItem_Click);
             // 
@@ -91,23 +90,12 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(93, 27);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // Home
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
@@ -130,7 +118,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolMenu;
         private System.Windows.Forms.ToolStripMenuItem optionItem;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
     }
 }
 

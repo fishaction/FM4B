@@ -28,18 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.inportButton = new System.Windows.Forms.Button();
+            this.importButton = new System.Windows.Forms.Button();
             this.inportCancelButton = new System.Windows.Forms.Button();
             this.previewButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -95,7 +97,7 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.inportButton);
+            this.flowLayoutPanel1.Controls.Add(this.importButton);
             this.flowLayoutPanel1.Controls.Add(this.inportCancelButton);
             this.flowLayoutPanel1.Controls.Add(this.previewButton);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(343, 140);
@@ -104,15 +106,16 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(114, 99);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
-            // inportButton
+            // importButton
             // 
-            this.inportButton.Location = new System.Drawing.Point(0, 0);
-            this.inportButton.Margin = new System.Windows.Forms.Padding(0, 0, 0, 15);
-            this.inportButton.Name = "inportButton";
-            this.inportButton.Size = new System.Drawing.Size(114, 23);
-            this.inportButton.TabIndex = 0;
-            this.inportButton.Text = "インポート(&I)";
-            this.inportButton.UseVisualStyleBackColor = true;
+            this.importButton.Location = new System.Drawing.Point(0, 0);
+            this.importButton.Margin = new System.Windows.Forms.Padding(0, 0, 0, 15);
+            this.importButton.Name = "importButton";
+            this.importButton.Size = new System.Drawing.Size(114, 23);
+            this.importButton.TabIndex = 0;
+            this.importButton.Text = "インポート(&I)";
+            this.importButton.UseVisualStyleBackColor = true;
+            this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 
             // inportCancelButton
             // 
@@ -212,7 +215,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button inportButton;
+        private System.Windows.Forms.Button importButton;
         private System.Windows.Forms.Button inportCancelButton;
         private System.Windows.Forms.Button previewButton;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -221,5 +224,6 @@
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
