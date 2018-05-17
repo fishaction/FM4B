@@ -14,10 +14,8 @@ namespace FileManager4Broadcasting
     public partial class ImportForm : Form
     {
 
-        private string[] files = new string[0];
-        private string[] filePaths = new string[0];
-        private string[] fileExts = new string[0];
 
+        private Dictionary<string, string> itemFilesDictionary = new Dictionary<string, string>();
         private Dictionary<string, string> importFilesDictionary = new Dictionary<string, string>();
 
         public ImportForm()
@@ -61,12 +59,14 @@ namespace FileManager4Broadcasting
         {
             for (int i = 0; i < fileNames.Length; i++)
             {
-                Array.Resize(ref filePaths, filePaths.Length + 1);
+                string fileName = Path.GetFileName(fileNames[i]);
+                itemFilesDictionary.Add(fileNames[i], fileName);
+                /*Array.Resize(ref filePaths, filePaths.Length + 1);
                 Array.Resize(ref files, files.Length + 1);
                 Array.Resize(ref fileExts, fileExts.Length + 1);
                 filePaths[filePaths.Length - 1] = fileNames[i];
                 files[files.Length - 1] = Path.GetFileNameWithoutExtension(fileNames[i]);
-                fileExts[files.Length - 1] = Path.GetFileName(fileNames[i]);
+                fileExts[files.Length - 1] = Path.GetFileName(fileNames[i]);*/
             }
             //MessageBox.Show(filePaths.Length.ToString());
             UpdateListBox();
@@ -75,9 +75,13 @@ namespace FileManager4Broadcasting
         private void UpdateListBox()
         {
             listBox1.Items.Clear();
-            for (int i = 0;i < filePaths.Length;i++)
+            /*for (int i = 0;i < filePaths.Length;i++)
             {
                 listBox1.Items.Add(fileExts[i]+"("+filePaths[i]+")");
+            }*/
+            foreach (string s in itemFilesDictionary.Keys)
+            {
+                listBox1.Items.Add(itemFilesDictionary[s] + "(" + s + ")");
             }
         }
 
@@ -103,9 +107,14 @@ namespace FileManager4Broadcasting
                     n = i;
                 }
             }
-
-            previewForm.fileUrl = filePaths[n];
-            MessageBox.Show(filePaths[n]);
+            foreach (string s in itemFilesDictionary.Keys)
+            {
+                string s2 = itemFilesDictionary[s]+"("+s+")";
+                if (s2 == (string)listBox1.SelectedItems[0])
+                {
+                    previewForm.fileUrl = s;
+                }
+            }
             //MessageBox.Show(filePaths[n]);
             //previewForm.fileUrl = filePaths[n] ;
             
@@ -141,21 +150,28 @@ namespace FileManager4Broadcasting
         {
             foreach(string s in listBox1.SelectedItems)
             {
-                int n = 0;
-                for (int i = 0;i<listBox1.Items.Count;i++)
+                Dictionary<string, string> dic = new Dictionary<string, string>();
+                foreach (string s2 in itemFilesDictionary.Keys)
                 {
-                    if ((string)listBox1.Items[i] == s)
+                    
+                    string s3 = itemFilesDictionary[s2] + "(" + s2 + ")";
+                    if (s == s3)
                     {
-                        n = i;
+                        importFilesDictionary.Add(s2, itemFilesDictionary[s2]);
+                        dic.Add(s2, itemFilesDictionary[s2]);
                     }
                 }
-                importFilesDictionary.Add(filePaths[n],s);
+                foreach (string keys in dic.Keys)
+                {
+                    itemFilesDictionary.Remove(keys);
+                }
             }
             listBox2.Items.Clear();
-            foreach(string s in importFilesDictionary.Values)
+            foreach (string s in importFilesDictionary.Keys)
             {
-                listBox2.Items.Add(s);
+                listBox2.Items.Add(importFilesDictionary[s]+"("+s+")");
             }
+            UpdateListBox();
         }
     }
 }
