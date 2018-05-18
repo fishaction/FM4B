@@ -49,10 +49,26 @@ namespace FileManager4Broadcasting
 
         private void listBox1_DragDrop(object sender, DragEventArgs e)
         {
-            string[] fileName =
+            string[] fns =
                     (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            List<string> fileNamesList = new List<string>();
+            foreach(string s in fns)
+            {
+                if (Directory.Exists(s))
+                {
+                    string[] files = Directory.GetFiles(s, "*", SearchOption.AllDirectories);
+                    foreach (string f in files)
+                    {
+                        fileNamesList.Add(f);
+                    }
+                }
+                else
+                {
+                    fileNamesList.Add(s);
+                }
+            }
 
-            AddItems(fileName);
+            AddItems(fileNamesList.ToArray());
         }
 
         private void AddItems(string[] fileNames)
