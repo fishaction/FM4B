@@ -164,7 +164,10 @@ namespace FileManager4Broadcasting
 
         private void importButton_Click(object sender, EventArgs e)
         {
-            foreach(string s in listBox1.SelectedItems)
+
+
+
+            foreach (string s in listBox1.SelectedItems)
             {
                 Dictionary<string, string> dic = new Dictionary<string, string>();
                 foreach (string s2 in itemFilesDictionary.Keys)
@@ -188,6 +191,11 @@ namespace FileManager4Broadcasting
                 listBox2.Items.Add(importFilesDictionary[s]+"("+s+")");
             }
             UpdateListBox();
+        }
+
+        void ImportFiles()
+        {
+
         }
     }
 }

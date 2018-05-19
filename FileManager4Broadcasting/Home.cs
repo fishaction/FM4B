@@ -28,7 +28,11 @@ namespace FileManager4Broadcasting
         private void optionItem_Click(object sender, EventArgs e)
         {
             OptionForm of = new OptionForm();
-            of.Show();
+            of.textBox1.Text = Properties.Settings.Default.saveLocation;
+            if (of.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default.saveLocation = of.textBox1.Text;
+            }
         }
 
         private void Home_DragDrop(object sender, DragEventArgs e)
@@ -71,6 +75,12 @@ namespace FileManager4Broadcasting
         {
             PreviewForm pf = new PreviewForm();
             pf.Show();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            ImportSettingForm isf = new ImportSettingForm();
+            isf.Show();
         }
     }
 }

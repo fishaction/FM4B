@@ -64,6 +64,12 @@
     <Compile Include="ImportForm.Designer.cs">
       <DependentUpon>ImportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImportSettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportSettingForm.Designer.cs">
+      <DependentUpon>ImportSettingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OptionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImportForm.resx">
       <DependentUpon>ImportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportSettingForm.resx">
+      <DependentUpon>ImportSettingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OptionForm.resx">
       <DependentUpon>OptionForm.cs</DependentUpon>
