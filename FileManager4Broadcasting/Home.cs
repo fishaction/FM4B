@@ -115,5 +115,44 @@ namespace FileManager4Broadcasting
         {
             
         }
+
+        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewProjectForm npf = new NewProjectForm();
+            if (npf.ShowDialog() == DialogResult.OK)
+            {
+                DataSet set = new DataSet();
+                DataTable table = new DataTable("Projects");
+
+                DataColumn number = new DataColumn("Number", typeof(int));
+                number.AutoIncrement = true;
+                DataColumn projectName = new DataColumn("ProjectName", typeof(string));
+                DataColumn description = new DataColumn("Description",typeof(string));
+                DataColumn date = new DataColumn("Date", typeof(DateTime));
+                table.Columns.Add(number);
+                table.Columns.Add(projectName);
+                table.Columns.Add(description);
+                table.Columns.Add(date);
+                set.Tables.Add(table);
+
+                DataRow row = table.NewRow();
+     
+                row["ProjectName"] = "プロジェクトの名前です";
+                row["Description"] = "説明です";
+                row["Date"] = DateTime.Today;
+                table.Rows.Add(row);
+                string json = JsonConvert.SerializeObject(set, Formatting.Indented);
+                MessageBox.Show(json);
+            }
+        }
     }
+
+    class Project
+    {
+        public int Number { get; set; }
+        public string ProjectName { get; set; }
+        public string Description { get; set; }
+        public string Date { get; set; }
+    }
+
 }
