@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace FileManager4Broadcasting
 {
@@ -14,6 +16,7 @@ namespace FileManager4Broadcasting
     {
 
         public string[] filePaths;
+        private string[] fileNames = {@"\プロジェクト",@"\素材"};
 
         public Home()
         {
@@ -32,8 +35,33 @@ namespace FileManager4Broadcasting
             if (of.ShowDialog() == DialogResult.OK)
             {
                 Properties.Settings.Default.saveLocation = of.textBox1.Text;
+                string saveLocation = Properties.Settings.Default.saveLocation;
+                if (Directory.Exists(saveLocation))
+                {
+                    if (!Directory.Exists(saveLocation + @"\FM4B"))
+                        Directory.CreateDirectory(saveLocation + @"\FM4B");
+                    saveLocation +=@"\FM4B";
+                    foreach(string name in fileNames)
+                    {
+                        if (Directory.Exists(saveLocation + name))
+                        {
+                            
+                        }
+                        else
+                        {
+                            Directory.CreateDirectory(saveLocation + name);
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    Properties.Settings.Default.saveLocation = "";
+                }
             }
         }
+
+
 
         private void Home_DragDrop(object sender, DragEventArgs e)
         {
@@ -81,6 +109,11 @@ namespace FileManager4Broadcasting
         {
             ImportSettingForm isf = new ImportSettingForm();
             isf.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
