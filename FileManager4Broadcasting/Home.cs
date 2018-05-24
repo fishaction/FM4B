@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace FileManager4Broadcasting
 {
@@ -16,7 +17,7 @@ namespace FileManager4Broadcasting
     {
 
         public string[] filePaths;
-        private string[] fileNames = {@"\プロジェクト",@"\素材"};
+        private string[] fileNames = { @"\プロジェクト", @"\素材" };
 
         public Home()
         {
@@ -30,6 +31,11 @@ namespace FileManager4Broadcasting
 
         private void optionItem_Click(object sender, EventArgs e)
         {
+            SettingSaveLocation();
+        }
+        
+        private void SettingSaveLocation()
+        {
             OptionForm of = new OptionForm();
             of.textBox1.Text = Properties.Settings.Default.saveLocation;
             if (of.ShowDialog() == DialogResult.OK)
@@ -40,8 +46,8 @@ namespace FileManager4Broadcasting
                 {
                     if (!Directory.Exists(saveLocation + @"\FM4B"))
                         Directory.CreateDirectory(saveLocation + @"\FM4B");
-                    saveLocation +=@"\FM4B";
-                    foreach(string name in fileNames)
+                    saveLocation += @"\FM4B";
+                    foreach (string name in fileNames)
                     {
                         if (Directory.Exists(saveLocation + name))
                         {
@@ -52,41 +58,12 @@ namespace FileManager4Broadcasting
                             Directory.CreateDirectory(saveLocation + name);
                         }
                     }
-                    
+
                 }
                 else
                 {
                     Properties.Settings.Default.saveLocation = "";
                 }
-            }
-        }
-
-
-
-        private void Home_DragDrop(object sender, DragEventArgs e)
-        {
-            /*開発中*/
-            if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
-            filePaths = (string[])e.Data.GetData(DataFormats.FileDrop, false);
-            foreach (string f in filePaths)
-            {
-                MessageBox.Show(f);
-            }
-
-            DupFilesForm dff = new DupFilesForm();
-            dff.home = this;
-            dff.Show();
-        }
-
-        private void Home_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.All;
-            }
-            else
-            {
-                e.Effect = DragDropEffects.None;
             }
         }
 
@@ -121,33 +98,117 @@ namespace FileManager4Broadcasting
             NewProjectForm npf = new NewProjectForm();
             if (npf.ShowDialog() == DialogResult.OK)
             {
+                CreateProject(npf.textBox1.Text, npf.textBox2.Text, npf.dateTimePicker1.Value);
+            }
+        }
+
+        public void CreateProject(string name, string description, DateTime dateTime)
+        {
+            string saveLocation = Properties.Settings.Default.saveLocation;
+
+
+            if (File.Exists(saveLocation + @"\FM4B\プロジェクト\projects.json"))
+            {
+                StreamReader sr = new StreamReader(saveLocation + @"\FM4B\プロジェクト\projects.json");
+                string json = sr.ReadToEnd();
+                sr.Close();
+                Project project = JsonConvert.DeserializeObject<Project>(json);
+
+                //汚いコードここから
                 DataSet set = new DataSet();
                 DataTable table = new DataTable("Projects");
-
                 DataColumn number = new DataColumn("Number", typeof(int));
                 number.AutoIncrement = true;
                 DataColumn projectName = new DataColumn("ProjectName", typeof(string));
-                DataColumn description = new DataColumn("Description",typeof(string));
+                DataColumn descri = new DataColumn("Description", typeof(string));
                 DataColumn date = new DataColumn("Date", typeof(DateTime));
                 table.Columns.Add(number);
                 table.Columns.Add(projectName);
-                table.Columns.Add(description);
+                table.Columns.Add(descri);
                 table.Columns.Add(date);
                 set.Tables.Add(table);
+                //ここまで
 
+                if (project == null)
+                {
+                    DataRow r = table.NewRow();
+                    r["ProjectName"] = name;
+                    r["Description"] = description;
+                    r["Date"] = dateTime;
+                    table.Rows.Add(r);
+                    json = JsonConvert.SerializeObject(set, Formatting.Indented);
+                    StreamWriter s = new StreamWriter(saveLocation + @"\FM4B\プロジェクト\projects.json",
+                    false);
+                    s.Write(json);
+                    s.Close();
+
+                    return;
+                }
+
+                foreach (ProjectInfo p in project.Projects)
+                {
+                    DataRow r = table.NewRow();
+                    r["ProjectName"] = p.ProjectName;
+                    r["Description"] = p.Description;
+                    r["Date"] = p.Date;
+                    table.Rows.Add(r);
+                }
                 DataRow row = table.NewRow();
-     
-                row["ProjectName"] = "プロジェクトの名前です";
-                row["Description"] = "説明です";
-                row["Date"] = DateTime.Today;
+                row["ProjectName"] = name;
+                row["Description"] = description;
+                row["Date"] = dateTime;
+                table.Rows.Add(row);
+                json = JsonConvert.SerializeObject(set, Formatting.Indented);
+                StreamWriter sw = new StreamWriter(saveLocation + @"\FM4B\プロジェクト\projects.json",
+                false);
+                sw.Write(json);
+                sw.Close();
+            }
+            else
+            {
+                StreamWriter sw = new StreamWriter(saveLocation + @"\FM4B\プロジェクト\projects.json",
+                false);
+                //汚いコードここから
+                DataSet set = new DataSet();
+                DataTable table = new DataTable("Projects");
+                DataColumn number = new DataColumn("Number", typeof(int));
+                number.AutoIncrement = true;
+                DataColumn projectName = new DataColumn("ProjectName", typeof(string));
+                DataColumn descri = new DataColumn("Description", typeof(string));
+                DataColumn date = new DataColumn("Date", typeof(DateTime));
+                table.Columns.Add(number);
+                table.Columns.Add(projectName);
+                table.Columns.Add(descri);
+                table.Columns.Add(date);
+                set.Tables.Add(table);
+                //ここまで
+                DataRow row = table.NewRow();
+                row["ProjectName"] = name;
+                row["Description"] = description;
+                row["Date"] = dateTime;
                 table.Rows.Add(row);
                 string json = JsonConvert.SerializeObject(set, Formatting.Indented);
-                MessageBox.Show(json);
+                sw.Write(json);
+                sw.Close();
+            }
+        }
+
+        private void Home_Shown(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(Properties.Settings.Default.saveLocation))
+            {
+                MessageBox.Show("ファイルの保存先を選択してください。");
+                SettingSaveLocation();
             }
         }
     }
 
     class Project
+    {
+        public List<ProjectInfo> Projects { get; set; }
+    }
+
+    class ProjectInfo
     {
         public int Number { get; set; }
         public string ProjectName { get; set; }
