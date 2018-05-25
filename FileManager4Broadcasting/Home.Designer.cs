@@ -106,6 +106,8 @@
             this.comboBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.ItemHeight = 16;
+            this.comboBox1.Items.AddRange(new object[] {
+            "(プロジェクトを選択してください)"});
             this.comboBox1.Location = new System.Drawing.Point(5, 5);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(790, 24);
@@ -134,9 +136,9 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Items.AddRange(new object[] {
             "テスト"});
-            this.listBox1.Location = new System.Drawing.Point(5, 54);
+            this.listBox1.Location = new System.Drawing.Point(5, 53);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(790, 367);
+            this.listBox1.Size = new System.Drawing.Size(790, 368);
             this.listBox1.TabIndex = 2;
             // 
             // Home

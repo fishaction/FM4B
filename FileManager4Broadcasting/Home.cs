@@ -62,35 +62,18 @@ namespace FileManager4Broadcasting
                 }
                 else
                 {
+                    MessageBox.Show("正しいパスを選択してください");
+                    SettingSaveLocation();
                     Properties.Settings.Default.saveLocation = "";
                 }
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ImportForm importForm = new ImportForm();
-            if (importForm.ShowDialog() == DialogResult.OK)
+            else if (of.ShowDialog() == DialogResult.Cancel)
             {
-                
+                if (Properties.Settings.Default.saveLocation == "")
+                {
+                    SettingSaveLocation();
+                }
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            PreviewForm pf = new PreviewForm();
-            pf.Show();
-        }
-
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            ImportSettingForm isf = new ImportSettingForm();
-            isf.Show();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -99,6 +82,7 @@ namespace FileManager4Broadcasting
             if (npf.ShowDialog() == DialogResult.OK)
             {
                 CreateProject(npf.textBox1.Text, npf.textBox2.Text, npf.dateTimePicker1.Value);
+                ReadProject();
             }
         }
 
@@ -112,8 +96,8 @@ namespace FileManager4Broadcasting
                 StreamReader sr = new StreamReader(saveLocation + @"\FM4B\プロジェクト\projects.json");
                 string json = sr.ReadToEnd();
                 sr.Close();
-                Project project = JsonConvert.DeserializeObject<Project>(json);
-
+                Json Json = JsonConvert.DeserializeObject<Json>(json);
+                
                 //汚いコードここから
                 DataSet set = new DataSet();
                 DataTable table = new DataTable("Projects");
@@ -129,7 +113,7 @@ namespace FileManager4Broadcasting
                 set.Tables.Add(table);
                 //ここまで
 
-                if (project == null)
+                if (Json == null)
                 {
                     DataRow r = table.NewRow();
                     r["ProjectName"] = name;
@@ -145,7 +129,7 @@ namespace FileManager4Broadcasting
                     return;
                 }
 
-                foreach (ProjectInfo p in project.Projects)
+                foreach (ProjectInfo p in Json.Projects)
                 {
                     DataRow r = table.NewRow();
                     r["ProjectName"] = p.ProjectName;
@@ -193,6 +177,36 @@ namespace FileManager4Broadcasting
             }
         }
 
+        public List<ProjectInfo> GetProjectInfos()
+        {
+            string saveLocation = Properties.Settings.Default.saveLocation + @"\FM4B\プロジェクト";
+            if (!File.Exists(saveLocation + @"\projects.json"))
+                return null;
+            StreamReader sr = new StreamReader(saveLocation + @"\projects.json");
+            string j = sr.ReadToEnd();
+            sr.Close();
+            Json json = JsonConvert.DeserializeObject<Json>(j);
+            List<ProjectInfo> projects = json.Projects;
+            return projects;
+        }
+
+        public void ReadProject()
+        {
+            comboBox1.Items.Clear();
+            comboBox1.Items.Add("(プロジェクトを選択してください)");
+            string saveLocation = Properties.Settings.Default.saveLocation + @"\FM4B\プロジェクト";
+            if (!File.Exists(saveLocation + @"\projects.json"))
+                return;
+            StreamReader sr = new StreamReader(saveLocation + @"\projects.json");
+            string j = sr.ReadToEnd();
+            sr.Close();
+            Json json = JsonConvert.DeserializeObject<Json>(j);
+            foreach (ProjectInfo pi in json.Projects)
+            {
+                comboBox1.Items.Add(pi.ProjectName);
+            }
+        }
+
         private void Home_Shown(object sender, EventArgs e)
         {
             if (!Directory.Exists(Properties.Settings.Default.saveLocation))
@@ -200,10 +214,11 @@ namespace FileManager4Broadcasting
                 MessageBox.Show("ファイルの保存先を選択してください。");
                 SettingSaveLocation();
             }
+            ReadProject();
         }
     }
 
-    class Project
+    class Json
     {
         public List<ProjectInfo> Projects { get; set; }
     }
