@@ -12,6 +12,9 @@ namespace FileManager4Broadcasting
 {
     public partial class NewProjectForm : Form
     {
+
+        public string[] projects;
+
         public NewProjectForm()
         {
             InitializeComponent();

@@ -78,25 +78,40 @@ namespace FileManager4Broadcasting
 
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Start:
             NewProjectForm npf = new NewProjectForm();
             if (npf.ShowDialog() == DialogResult.OK)
             {
-                CreateProject(npf.textBox1.Text, npf.textBox2.Text, npf.dateTimePicker1.Value);
+                bool result = CreateProject(npf.textBox1.Text, npf.textBox2.Text, npf.dateTimePicker1.Value);
+                if (!result)
+                {
+                    MessageBox.Show("既に存在するプロジェクト名、または利用できない文字が使われています。");
+                    goto Start;
+                }
                 ReadProject();
             }
         }
 
-        public void CreateProject(string name, string description, DateTime dateTime)
+        public bool CreateProject(string name, string description, DateTime dateTime)
         {
             string saveLocation = Properties.Settings.Default.saveLocation;
 
+            System.Text.RegularExpressions.Regex regex =
+    new System.Text.RegularExpressions.Regex(
+        "[\\x00-\\x1f<>:\"/\\\\|?*]" +
+        "|^(CON|PRN|AUX|NUL|COM[0-9]|LPT[0-9]|CLOCK\\$)(\\.|$)" +
+        "|[\\. ]$",
+    System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            //マッチしたら、不正なファイル名
+            if (regex.IsMatch(name))
+            {
+                return false;
+            }
 
             if (File.Exists(saveLocation + @"\FM4B\プロジェクト\projects.json"))
             {
-                StreamReader sr = new StreamReader(saveLocation + @"\FM4B\プロジェクト\projects.json");
-                string json = sr.ReadToEnd();
-                sr.Close();
-                Json Json = JsonConvert.DeserializeObject<Json>(json);
+
+                List<ProjectInfo> projects = GetProjectInfos();
                 
                 //汚いコードここから
                 DataSet set = new DataSet();
@@ -106,47 +121,62 @@ namespace FileManager4Broadcasting
                 DataColumn projectName = new DataColumn("ProjectName", typeof(string));
                 DataColumn descri = new DataColumn("Description", typeof(string));
                 DataColumn date = new DataColumn("Date", typeof(DateTime));
+                DataColumn saveDic = new DataColumn("SaveDirectory", typeof(string));
                 table.Columns.Add(number);
                 table.Columns.Add(projectName);
                 table.Columns.Add(descri);
                 table.Columns.Add(date);
+                table.Columns.Add(saveDic);
                 set.Tables.Add(table);
                 //ここまで
 
-                if (Json == null)
+                string j = "";
+
+                if (projects == null)
                 {
                     DataRow r = table.NewRow();
                     r["ProjectName"] = name;
                     r["Description"] = description;
                     r["Date"] = dateTime;
+                    r["SaveDirectory"] = saveLocation + @"\FM4B\プロジェクト";
                     table.Rows.Add(r);
-                    json = JsonConvert.SerializeObject(set, Formatting.Indented);
+                    j = JsonConvert.SerializeObject(set, Formatting.Indented);
                     StreamWriter s = new StreamWriter(saveLocation + @"\FM4B\プロジェクト\projects.json",
                     false);
-                    s.Write(json);
+                    s.Write(j);
                     s.Close();
-
-                    return;
+                    Directory.CreateDirectory(saveLocation + @"\FM4B\プロジェクト\"+name);
+                    return true;
                 }
 
-                foreach (ProjectInfo p in Json.Projects)
+                foreach (ProjectInfo p in projects)
                 {
+
+                    if (p.ProjectName == name)
+                    {
+                        return false;
+                    }
+
                     DataRow r = table.NewRow();
                     r["ProjectName"] = p.ProjectName;
                     r["Description"] = p.Description;
                     r["Date"] = p.Date;
+                    r["SaveDirectory"] = saveLocation + @"\FM4B\プロジェクト";
                     table.Rows.Add(r);
                 }
                 DataRow row = table.NewRow();
                 row["ProjectName"] = name;
                 row["Description"] = description;
                 row["Date"] = dateTime;
+                row["SaveDirectory"] = saveLocation + @"\FM4B\プロジェクト";
                 table.Rows.Add(row);
-                json = JsonConvert.SerializeObject(set, Formatting.Indented);
+                j = JsonConvert.SerializeObject(set, Formatting.Indented);
                 StreamWriter sw = new StreamWriter(saveLocation + @"\FM4B\プロジェクト\projects.json",
                 false);
-                sw.Write(json);
+                sw.Write(j);
                 sw.Close();
+                Directory.CreateDirectory(saveLocation + @"\FM4B\プロジェクト\" + name);
+                return true;
             }
             else
             {
@@ -160,20 +190,25 @@ namespace FileManager4Broadcasting
                 DataColumn projectName = new DataColumn("ProjectName", typeof(string));
                 DataColumn descri = new DataColumn("Description", typeof(string));
                 DataColumn date = new DataColumn("Date", typeof(DateTime));
+                DataColumn saveDic = new DataColumn("SaveDirectory", typeof(string));
                 table.Columns.Add(number);
                 table.Columns.Add(projectName);
                 table.Columns.Add(descri);
                 table.Columns.Add(date);
+                table.Columns.Add(saveDic);
                 set.Tables.Add(table);
                 //ここまで
                 DataRow row = table.NewRow();
                 row["ProjectName"] = name;
                 row["Description"] = description;
                 row["Date"] = dateTime;
+                row["SaveDirectory"] = saveLocation + @"\FM4B\プロジェクト";
                 table.Rows.Add(row);
                 string json = JsonConvert.SerializeObject(set, Formatting.Indented);
                 sw.Write(json);
                 sw.Close();
+                Directory.CreateDirectory(saveLocation + @"\FM4B\プロジェクト\" + name);
+                return true;
             }
         }
 
@@ -194,14 +229,10 @@ namespace FileManager4Broadcasting
         {
             comboBox1.Items.Clear();
             comboBox1.Items.Add("(プロジェクトを選択してください)");
-            string saveLocation = Properties.Settings.Default.saveLocation + @"\FM4B\プロジェクト";
-            if (!File.Exists(saveLocation + @"\projects.json"))
+            List<ProjectInfo> projects = GetProjectInfos();
+            if (projects == null)
                 return;
-            StreamReader sr = new StreamReader(saveLocation + @"\projects.json");
-            string j = sr.ReadToEnd();
-            sr.Close();
-            Json json = JsonConvert.DeserializeObject<Json>(j);
-            foreach (ProjectInfo pi in json.Projects)
+            foreach (ProjectInfo pi in projects)
             {
                 comboBox1.Items.Add(pi.ProjectName);
             }
@@ -223,12 +254,13 @@ namespace FileManager4Broadcasting
         public List<ProjectInfo> Projects { get; set; }
     }
 
-    class ProjectInfo
+    public class ProjectInfo
     {
         public int Number { get; set; }
         public string ProjectName { get; set; }
         public string Description { get; set; }
         public string Date { get; set; }
+        public string SaveDirectory { get; set; }
     }
 
 }
