@@ -17,6 +17,8 @@ namespace FileManager4Broadcasting
         private bool _stop = false;
         private int count = 0;
         private int filePathLength = 0;
+        public string dupLocation;
+        public string[] files;
 
         public DupFilesForm()
         {
@@ -25,21 +27,18 @@ namespace FileManager4Broadcasting
 
         private void DupFilesForm_Load(object sender, EventArgs e)
         {
-            foreach (string s in home.filePaths)
-            {
-                MessageBox.Show(s);
-            }
+            
         }
 
         private void DupFilesForm_Shown(object sender, EventArgs e)
         {
             progressBar2.Value = 0;
-            progressBar2.Maximum = home.filePaths.Length * 100;
-            filePathLength = home.filePaths.Length;
-            foreach (string s in home.filePaths)
+            progressBar2.Maximum = files.Length * 100;
+            filePathLength = files.Length;
+            foreach (string s in files)
             {
                 count += 1;
-                DupFile(s, @"C:\Users\Owner\Desktop\テスト用フォルダ\");
+                DupFile(s, dupLocation);
             }
             Close();
         }

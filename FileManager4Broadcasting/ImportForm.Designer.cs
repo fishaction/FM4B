@@ -171,7 +171,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(88, 23);
             this.button4.TabIndex = 2;
-            this.button4.Text = "OK";
+            this.button4.Text = "OK(&O)";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -194,7 +194,7 @@
             this.Controls.Add(this.button4);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "ImportForm";

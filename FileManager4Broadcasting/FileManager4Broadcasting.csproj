@@ -54,6 +54,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddResource.cs" />
     <Compile Include="DupFilesForm.cs">
       <SubType>Form</SubType>
     </Compile>

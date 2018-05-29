@@ -32,8 +32,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,13 +68,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "保存先";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(6, 21);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(342, 19);
-            this.textBox1.TabIndex = 0;
-            // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(354, 19);
@@ -84,6 +77,13 @@
             this.button3.Text = "参照(&R)";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(6, 21);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(342, 19);
+            this.textBox1.TabIndex = 0;
             // 
             // OptionForm
             // 

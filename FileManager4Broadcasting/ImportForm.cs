@@ -165,8 +165,6 @@ namespace FileManager4Broadcasting
         private void importButton_Click(object sender, EventArgs e)
         {
 
-
-
             foreach (string s in listBox1.SelectedItems)
             {
                 Dictionary<string, string> dic = new Dictionary<string, string>();

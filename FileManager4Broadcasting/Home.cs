@@ -22,6 +22,7 @@ namespace FileManager4Broadcasting
         public Home()
         {
             InitializeComponent();
+            
         }
 
         private void exitItem_Click(object sender, EventArgs e)
@@ -246,6 +247,11 @@ namespace FileManager4Broadcasting
                 SettingSaveLocation();
             }
             ReadProject();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 
