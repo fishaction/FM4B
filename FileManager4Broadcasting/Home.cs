@@ -22,7 +22,6 @@ namespace FileManager4Broadcasting
         public Home()
         {
             InitializeComponent();
-            
         }
 
         private void exitItem_Click(object sender, EventArgs e)
@@ -251,7 +250,15 @@ namespace FileManager4Broadcasting
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            string[] tags = { "タグ1", "タグ2", "タグ3" };
+            MessageBox.Show(comboBox1.Text);
+            AddResource.CreateJsonFile(@"C:\Users\Owner\Desktop\00073.MTS", comboBox1.Text, "これはテストです。", ResourceType.Video, tags, DateTime.Today, false);
+            List<FilesAttribute> filesAttributes= AddResource.GetFiles(comboBox1.Text);
+            listBox1.Items.Clear();
+            foreach (FilesAttribute fa in filesAttributes)
+            {
+                listBox1.Items.Add(fa.FileName);
+            }
         }
     }
 
