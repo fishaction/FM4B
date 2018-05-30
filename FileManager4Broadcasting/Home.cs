@@ -250,6 +250,9 @@ namespace FileManager4Broadcasting
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (comboBox1.Text == "" || comboBox1.Text == "(プロジェクトを選択してください)")
+                return;
+
             string[] tags = { "タグ1", "タグ2", "タグ3" };
             MessageBox.Show(comboBox1.Text);
             AddResource.CreateJsonFile(@"C:\Users\Owner\Desktop\00073.MTS", comboBox1.Text, "これはテストです。", ResourceType.Video, tags, DateTime.Today, false);
