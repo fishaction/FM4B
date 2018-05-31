@@ -66,6 +66,27 @@ namespace FileManager4Broadcasting
             List<FilesAttribute> files = json.Files;
             return files;
         }
+
+        static public FilesAttribute GetFile(string projectName,int n)
+        {
+            string saveLocation = Properties.Settings.Default.saveLocation + @"\FM4B\プロジェクト\" + projectName;
+            if (!File.Exists(saveLocation + @"\files.json"))
+                return null;
+            StreamReader sr = new StreamReader(saveLocation + @"\files.json");
+            string j = sr.ReadToEnd();
+            sr.Close();
+            FilesJson json = JsonConvert.DeserializeObject<FilesJson>(j);
+            List<FilesAttribute> files = json.Files;
+            foreach (FilesAttribute fa in files)
+            {
+                if (fa.Number == n)
+                {
+                    return fa;
+                }
+            }
+            return null;
+        }
+
         static public void CreateJsonFile(string path,string projectName,string d,ResourceType type,string[] _tags,DateTime cDate,bool _isLinked)
         {
             string saveLocation = Properties.Settings.Default.saveLocation + @"\FM4B\プロジェクト\" + projectName;

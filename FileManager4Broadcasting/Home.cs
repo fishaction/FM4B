@@ -256,11 +256,57 @@ namespace FileManager4Broadcasting
             string[] tags = { "タグ1", "タグ2", "タグ3" };
             MessageBox.Show(comboBox1.Text);
             AddResource.CreateJsonFile(@"C:\Users\Owner\Desktop\00073.MTS", comboBox1.Text, "これはテストです。", ResourceType.Video, tags, DateTime.Today, false);
-            List<FilesAttribute> filesAttributes= AddResource.GetFiles(comboBox1.Text);
+            SetListBox();
+        }
+
+        void SetListBox()
+        {
+            List<FilesAttribute> filesAttributes = AddResource.GetFiles(comboBox1.Text);
             listBox1.Items.Clear();
             foreach (FilesAttribute fa in filesAttributes)
             {
                 listBox1.Items.Add(fa.FileName);
+            }
+        }
+
+        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            FilesAttribute fa = AddResource.GetFile("テスト",listBox1.SelectedIndex);
+            MessageBox.Show(fa.Description);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            List<FilesAttribute> filesAttributes = AddResource.GetFiles(comboBox1.Text);
+            foreach (FilesAttribute fa in filesAttributes)
+            {
+                if (textBox2.Text!="")
+                {
+                    string[] strs = textBox2.Text.Split(',');
+                    int i = 0;
+                    foreach (string s in strs)
+                    {
+                        if (0 <= Array.IndexOf(fa.Tags, s))
+                        {
+                            i++;
+                        }
+                    }
+                    if (i >= strs.Length)
+                    {
+                        if (fa.FileName.Contains(textBox1.Text))
+                        {
+                            listBox1.Items.Add(fa.FileName);
+                        }
+                    }
+                }
+                else
+                {
+                    if (fa.FileName.Contains(textBox1.Text))
+                    {
+                        listBox1.Items.Add(fa.FileName);
+                    }
+                }
             }
         }
     }
