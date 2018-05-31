@@ -39,8 +39,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -67,25 +67,25 @@
             this.toolStripSeparator1,
             this.exitItem});
             this.fileMenu.Name = "fileMenu";
-            this.fileMenu.Size = new System.Drawing.Size(85, 24);
+            this.fileMenu.Size = new System.Drawing.Size(67, 24);
             this.fileMenu.Text = "ファイル(&F)";
             // 
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.newProjectToolStripMenuItem.Text = "新規(&N)";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(112, 6);
             // 
             // exitItem
             // 
             this.exitItem.Name = "exitItem";
-            this.exitItem.Size = new System.Drawing.Size(180, 22);
+            this.exitItem.Size = new System.Drawing.Size(115, 22);
             this.exitItem.Text = "終了(&X)";
             this.exitItem.Click += new System.EventHandler(this.exitItem_Click);
             // 
@@ -94,13 +94,13 @@
             this.toolMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionItem});
             this.toolMenu.Name = "toolMenu";
-            this.toolMenu.Size = new System.Drawing.Size(74, 24);
+            this.toolMenu.Size = new System.Drawing.Size(60, 24);
             this.toolMenu.Text = "ツール(&T)";
             // 
             // optionItem
             // 
             this.optionItem.Name = "optionItem";
-            this.optionItem.Size = new System.Drawing.Size(180, 22);
+            this.optionItem.Size = new System.Drawing.Size(135, 22);
             this.optionItem.Text = "オプション(&O)";
             this.optionItem.Click += new System.EventHandler(this.optionItem_Click);
             // 
@@ -168,14 +168,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(790, 23);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
-            // textBox1
-            // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(3, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(389, 19);
-            this.textBox1.TabIndex = 0;
-            // 
             // textBox2
             // 
             this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -183,6 +175,14 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(389, 19);
             this.textBox2.TabIndex = 1;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Location = new System.Drawing.Point(3, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(389, 19);
+            this.textBox1.TabIndex = 0;
             // 
             // button1
             // 

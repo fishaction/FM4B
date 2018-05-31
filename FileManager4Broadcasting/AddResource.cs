@@ -156,7 +156,7 @@ namespace FileManager4Broadcasting
         public List<FilesAttribute> Files { get; set; }
     }
 
-    class FilesAttribute
+    public class FilesAttribute
     {
         public int Number { get; set; }
         public string FileName { get; set; }

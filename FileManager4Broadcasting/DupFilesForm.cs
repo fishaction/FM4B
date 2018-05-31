@@ -18,7 +18,8 @@ namespace FileManager4Broadcasting
         private int count = 0;
         private int filePathLength = 0;
         public string dupLocation;
-        public string[] files;
+        public FilesAttribute[] filesAttributes;
+        string projectName;
 
         public DupFilesForm()
         {
@@ -33,12 +34,26 @@ namespace FileManager4Broadcasting
         private void DupFilesForm_Shown(object sender, EventArgs e)
         {
             progressBar2.Value = 0;
-            progressBar2.Maximum = files.Length * 100;
-            filePathLength = files.Length;
-            foreach (string s in files)
+            progressBar2.Maximum = filesAttributes.Length * 100;
+            filePathLength = filesAttributes.Length;
+            foreach (FilesAttribute fa in filesAttributes)
             {
+                string saveLocation = Properties.Settings.Default.saveLocation + @"\FM4B\プロジェクト\" + projectName;
                 count += 1;
-                DupFile(s, dupLocation);
+                switch (fa.ResourceType)
+                {
+                    case "Video":
+                        saveLocation += @"\映像\"+fa.FileName;
+                        break;
+                    case "Sound":
+                        saveLocation += @"\音声\"+fa.FileName;
+                        break;
+                    case "Image":
+                        saveLocation += @"\画像\"+fa.FileName;
+                        break;
+                }
+                DupFile(fa.FilePath, saveLocation);
+                
             }
             Close();
         }
