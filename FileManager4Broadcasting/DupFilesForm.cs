@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Threading;
+using System.IO;
 
 namespace FileManager4Broadcasting
 {
@@ -19,7 +20,7 @@ namespace FileManager4Broadcasting
         private int filePathLength = 0;
         public string dupLocation;
         public FilesAttribute[] filesAttributes;
-        string projectName;
+        public string projectName;
 
         public DupFilesForm()
         {
@@ -36,24 +37,40 @@ namespace FileManager4Broadcasting
             progressBar2.Value = 0;
             progressBar2.Maximum = filesAttributes.Length * 100;
             filePathLength = filesAttributes.Length;
+            string saveLocation = Properties.Settings.Default.saveLocation + @"\FM4B\プロジェクト\" + projectName;
+            if (!Directory.Exists(saveLocation + @"\画像"))
+            {
+                Directory.CreateDirectory(saveLocation + @"\画像");
+            }
+            if (!Directory.Exists(saveLocation + @"\映像"))
+            {
+                Directory.CreateDirectory(saveLocation + @"\映像");
+            }
+            if (!Directory.Exists(saveLocation + @"\音声"))
+            {
+                Directory.CreateDirectory(saveLocation + @"\音声");
+            }
             foreach (FilesAttribute fa in filesAttributes)
             {
-                string saveLocation = Properties.Settings.Default.saveLocation + @"\FM4B\プロジェクト\" + projectName;
+                ResourceType resourceType = ResourceType.Video;
                 count += 1;
                 switch (fa.ResourceType)
                 {
                     case "Video":
-                        saveLocation += @"\映像\"+fa.FileName;
+                        saveLocation += @"\映像\";
+                        resourceType = ResourceType.Video;
                         break;
                     case "Sound":
-                        saveLocation += @"\音声\"+fa.FileName;
+                        saveLocation += @"\音声\";
+                        resourceType = ResourceType.Sound;
                         break;
                     case "Image":
-                        saveLocation += @"\画像\"+fa.FileName;
+                        saveLocation += @"\画像\";
+                        resourceType = ResourceType.Image;
                         break;
                 }
                 DupFile(fa.FilePath, saveLocation);
-                
+                AddResource.CreateJsonFile(saveLocation,projectName,fa.Description,resourceType,fa.Tags,fa.CreatedDate,fa.IsLinked);
             }
             Close();
         }

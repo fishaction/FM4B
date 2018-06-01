@@ -32,6 +32,20 @@ namespace FileManager4Broadcasting
         private void optionItem_Click(object sender, EventArgs e)
         {
             SettingSaveLocation();
+            DupFilesForm dff = new DupFilesForm();
+            dff.projectName = "テスト";
+            FilesAttribute fa = new FilesAttribute();
+            fa.Number = 1;
+            fa.FileName = "テスト.mts";
+            fa.FilePath = @"C:\Users\Owner\Desktop\00073.MTS";
+            fa.Description = "テストです。";
+            fa.ResourceType = "Video";
+            fa.Tags = new string[] { "あ", "い", "う" };
+            fa.ImportedDate = DateTime.Today;
+            fa.ImportedDate = DateTime.Today;
+            FilesAttribute[] fas = { fa };
+            dff.filesAttributes = fas;
+            dff.ShowDialog();
         }
         
         private void SettingSaveLocation()
