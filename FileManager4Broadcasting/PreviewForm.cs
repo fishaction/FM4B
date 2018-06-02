@@ -29,7 +29,6 @@ namespace FileManager4Broadcasting
         {
             axWindowsMediaPlayer1.Ctlcontrols.stop();
             axWindowsMediaPlayer1.URL = fileUrl;
-            MessageBox.Show(axWindowsMediaPlayer1.URL);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -93,6 +92,11 @@ namespace FileManager4Broadcasting
             axWindowsMediaPlayer1.Ctlcontrols.currentPosition = trackBar1.Value;
             axWindowsMediaPlayer1.Ctlcontrols.play();
             timer1.Enabled = true;
+        }
+
+        private void PreviewForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            axWindowsMediaPlayer1.Ctlcontrols.stop();
         }
     }
 }

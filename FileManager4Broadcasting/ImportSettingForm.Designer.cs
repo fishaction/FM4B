@@ -30,6 +30,7 @@
         {
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -41,12 +42,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.fileNameBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -72,41 +73,55 @@
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 247F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.button2, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.button1, 0, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(260, 297);
+            this.tableLayoutPanel3.Controls.Add(this.button4, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.button2, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.button1, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 297);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(175, 30);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(432, 30);
             this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // button4
+            // 
+            this.button4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button4.Enabled = false;
+            this.button4.Location = new System.Drawing.Point(3, 3);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(86, 24);
+            this.button4.TabIndex = 2;
+            this.button4.Text = "プレビュー(&P)";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button2
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(90, 3);
+            this.button2.Location = new System.Drawing.Point(342, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(82, 24);
+            this.button2.Size = new System.Drawing.Size(87, 24);
             this.button2.TabIndex = 1;
             this.button2.Text = "キャンセル(&C)";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(3, 3);
+            this.button1.Location = new System.Drawing.Point(250, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(81, 24);
+            this.button1.Size = new System.Drawing.Size(86, 24);
             this.button1.TabIndex = 0;
             this.button1.Text = "OK(&O)";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tableLayoutPanel4
             // 
@@ -146,7 +161,7 @@
             this.memoLabel.Name = "memoLabel";
             this.memoLabel.Size = new System.Drawing.Size(291, 170);
             this.memoLabel.TabIndex = 9;
-            this.memoLabel.TextChanged += new System.EventHandler(this.BoxTextChanged);
+            this.memoLabel.TextChanged += new System.EventHandler(this.memoChanged);
             // 
             // label7
             // 
@@ -168,7 +183,7 @@
             this.tagBox.Name = "tagBox";
             this.tagBox.Size = new System.Drawing.Size(291, 19);
             this.tagBox.TabIndex = 7;
-            this.tagBox.TextChanged += new System.EventHandler(this.BoxTextChanged);
+            this.tagBox.TextChanged += new System.EventHandler(this.tagChanged);
             // 
             // label6
             // 
@@ -230,6 +245,27 @@
             this.fileNameBox.TabIndex = 1;
             this.fileNameBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NameBoxKeyDown);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Location = new System.Drawing.Point(3, 56);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(129, 28);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "カテゴリ";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(138, 59);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(291, 20);
+            this.comboBox1.TabIndex = 11;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.resourceTypeChanged);
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
@@ -276,6 +312,7 @@
             // button3
             // 
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(3, 303);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(124, 24);
@@ -284,29 +321,9 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 56);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 28);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "カテゴリ";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(138, 59);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(291, 20);
-            this.comboBox1.TabIndex = 11;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.BoxTextChanged);
-            // 
             // ImportSettingForm
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(580, 336);
@@ -315,6 +332,8 @@
             this.Name = "ImportSettingForm";
             this.Text = "ImportSettingForm";
             this.Shown += new System.EventHandler(this.ImportSettingForm_Shown);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.ImportSettingForm_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.ImportSettingForm_DragEnter);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -346,5 +365,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button4;
     }
 }

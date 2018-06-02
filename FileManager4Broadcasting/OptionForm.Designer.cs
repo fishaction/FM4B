@@ -87,8 +87,10 @@
             // 
             // OptionForm
             // 
+            this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.button2;
             this.ClientSize = new System.Drawing.Size(460, 106);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);

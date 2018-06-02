@@ -42,8 +42,8 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -70,25 +70,25 @@
             this.toolStripSeparator1,
             this.exitItem});
             this.fileMenu.Name = "fileMenu";
-            this.fileMenu.Size = new System.Drawing.Size(85, 24);
+            this.fileMenu.Size = new System.Drawing.Size(67, 24);
             this.fileMenu.Text = "ファイル(&F)";
             // 
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.newProjectToolStripMenuItem.Text = "新規(&N)";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(116, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(112, 6);
             // 
             // exitItem
             // 
             this.exitItem.Name = "exitItem";
-            this.exitItem.Size = new System.Drawing.Size(119, 22);
+            this.exitItem.Size = new System.Drawing.Size(115, 22);
             this.exitItem.Text = "終了(&X)";
             this.exitItem.Click += new System.EventHandler(this.exitItem_Click);
             // 
@@ -97,13 +97,13 @@
             this.toolMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionItem});
             this.toolMenu.Name = "toolMenu";
-            this.toolMenu.Size = new System.Drawing.Size(74, 24);
+            this.toolMenu.Size = new System.Drawing.Size(60, 24);
             this.toolMenu.Text = "ツール(&T)";
             // 
             // optionItem
             // 
             this.optionItem.Name = "optionItem";
-            this.optionItem.Size = new System.Drawing.Size(155, 22);
+            this.optionItem.Size = new System.Drawing.Size(135, 22);
             this.optionItem.Text = "オプション(&O)";
             this.optionItem.Click += new System.EventHandler(this.optionItem_Click);
             // 
@@ -147,8 +147,6 @@
             this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox1.Font = new System.Drawing.Font("MS UI Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Items.AddRange(new object[] {
-            "テスト"});
             this.listBox1.Location = new System.Drawing.Point(5, 100);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(790, 321);
@@ -202,20 +200,10 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(180, 30);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(93, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 24);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "検索(&S)";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // button2
             // 
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(3, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(84, 24);
@@ -223,6 +211,18 @@
             this.button2.Text = "追加(&C)";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(93, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(84, 24);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "検索(&S)";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Home
             // 

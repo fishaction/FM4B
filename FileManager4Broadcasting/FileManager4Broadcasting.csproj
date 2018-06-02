@@ -61,6 +61,12 @@
     <Compile Include="DupFilesForm.Designer.cs">
       <DependentUpon>DupFilesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FileInfo.Designer.cs">
+      <DependentUpon>FileInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     <Compile Include="Win32.cs" />
     <EmbeddedResource Include="DupFilesForm.resx">
       <DependentUpon>DupFilesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileInfo.resx">
+      <DependentUpon>FileInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>

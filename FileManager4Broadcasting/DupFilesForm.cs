@@ -52,6 +52,7 @@ namespace FileManager4Broadcasting
             }
             foreach (FilesAttribute fa in filesAttributes)
             {
+                saveLocation = Properties.Settings.Default.saveLocation + @"\FM4B\プロジェクト\" + projectName;
                 ResourceType resourceType = ResourceType.Video;
                 count += 1;
                 switch (fa.ResourceType)

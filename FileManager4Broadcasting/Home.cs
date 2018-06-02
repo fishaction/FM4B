@@ -33,20 +33,6 @@ namespace FileManager4Broadcasting
         private void optionItem_Click(object sender, EventArgs e)
         {
             SettingSaveLocation();
-            DupFilesForm dff = new DupFilesForm();
-            dff.projectName = "テスト";
-            FilesAttribute fa = new FilesAttribute();
-            fa.Number = 1;
-            fa.FileName = "テスト2.mts";
-            fa.FilePath = @"C:\Users\Owner\Desktop\00073.MTS";
-            fa.Description = "テストです。";
-            fa.ResourceType = "Video";
-            fa.Tags = new string[] { "あ", "い", "う" };
-            fa.ImportedDate = DateTime.Today;
-            fa.ImportedDate = DateTime.Today;
-            FilesAttribute[] fas = { fa };
-            dff.filesAttributes = fas;
-            dff.ShowDialog();
         }
         
         private void SettingSaveLocation()
@@ -267,11 +253,14 @@ namespace FileManager4Broadcasting
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.Text == "" || comboBox1.Text == "(プロジェクトを選択してください)")
+            {
+                listBox1.Items.Clear();
+                button2.Enabled = false;
+                button1.Enabled = false;
                 return;
-
-            string[] tags = { "タグ1", "タグ2", "タグ3" };
-            MessageBox.Show(comboBox1.Text);
-            AddResource.CreateJsonFile(@"C:\Users\Owner\Desktop\00073.MTS", comboBox1.Text, "これはテストです。", ResourceType.Video, tags, DateTime.Today, false);
+            }
+            button2.Enabled = true;
+            button1.Enabled = true;
             SetListBox();
         }
 
@@ -279,6 +268,12 @@ namespace FileManager4Broadcasting
         {
             List<FilesAttribute> filesAttributes = AddResource.GetFiles(comboBox1.Text);
             listBox1.Items.Clear();
+            if (filesAttributes == null)
+            {
+                button1.Enabled = false;
+                return;
+            }
+            button1.Enabled = true;
             foreach (FilesAttribute fa in filesAttributes)
             {
                 listBox1.Items.Add(fa.FileName);
@@ -287,15 +282,22 @@ namespace FileManager4Broadcasting
 
         private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            FilesAttribute fa = AddResource.GetFile("テスト",listBox1.SelectedIndex);
-            MessageBox.Show(fa.Description);
+            FileInfo fi = new FileInfo();
+            fi.filesAttribute = AddResource.GetFile(comboBox1.Text, listBox1.Text);
+            if (fi.filesAttribute == null)
+                return;
+            fi.projectName = comboBox1.Text;
+            fi.ShowDialog();
+            if (fi.DialogResult == DialogResult.OK)
+            {
+
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
             List<FilesAttribute> filesAttributes = AddResource.GetFiles(comboBox1.Text);
-            
             foreach (FilesAttribute fa in filesAttributes)
             {
                 if (textBox2.Text!="")
@@ -329,10 +331,28 @@ namespace FileManager4Broadcasting
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ImportForm importForm = new ImportForm();
-            importForm.ShowDialog();
+            ImportSettingForm isf = new ImportSettingForm();
+            isf.projectName = comboBox1.Text;
+            isf.FormClosed += new FormClosedEventHandler(ISFColosed);
+            isf.Show();
+            
+
             /*ImportSettingForm isf = new ImportSettingForm();
             isf.ShowDialog();*/
+        }
+        private void ISFColosed(object sender,FormClosedEventArgs s)
+        {
+            ImportSettingForm isf = (ImportSettingForm)sender;
+            if (isf.DialogResult == DialogResult.OK)
+            {
+                if (isf.filesAttributes == null)
+                    return;
+                DupFilesForm dff = new DupFilesForm();
+                dff.filesAttributes = isf.filesAttributes;
+                dff.projectName = comboBox1.Text;
+                dff.ShowDialog();
+                SetListBox();
+            }
         }
     }
 
