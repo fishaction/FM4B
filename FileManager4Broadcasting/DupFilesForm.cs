@@ -57,15 +57,15 @@ namespace FileManager4Broadcasting
                 switch (fa.ResourceType)
                 {
                     case "Video":
-                        saveLocation += @"\映像\";
+                        saveLocation += @"\映像\"+fa.FileName;
                         resourceType = ResourceType.Video;
                         break;
                     case "Sound":
-                        saveLocation += @"\音声\";
+                        saveLocation += @"\音声\"+fa.FileName;
                         resourceType = ResourceType.Sound;
                         break;
                     case "Image":
-                        saveLocation += @"\画像\";
+                        saveLocation += @"\画像\"+fa.FileName;
                         resourceType = ResourceType.Image;
                         break;
                 }
@@ -75,15 +75,13 @@ namespace FileManager4Broadcasting
             Close();
         }
 
-        void DupFile(string filePath,string directoryPath)
+        void DupFile(string filePath,string dupPath)
         {
-            string fileName = System.IO.Path.GetFileNameWithoutExtension(filePath);
-            string extension = System.IO.Path.GetExtension(filePath);
-            fileNameLabel.Text = fileName + extension;
+            fileNameLabel.Text = Path.GetFileName(dupPath);
             progressBar1.Value = 0;
             PInvoke.Win32API copyObject = new PInvoke.Win32API();
             copyObject.ProgressChanged += new PInvoke.Win32API.CopyProgressEventHandler(ProgressChanged);
-            PInvoke.Win32API.ResultStatus ret = copyObject.CopyStart(filePath,directoryPath+@"\"+fileName+extension, true);
+            PInvoke.Win32API.ResultStatus ret = copyObject.CopyStart(filePath,dupPath, true);
             switch (ret)
             {
                 case PInvoke.Win32API.ResultStatus.Completed:

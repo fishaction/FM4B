@@ -76,7 +76,10 @@ namespace FileManager4Broadcasting
             for (int i = 0; i < fileNames.Length; i++)
             {
                 string fileName = Path.GetFileName(fileNames[i]);
-                itemFilesDictionary.Add(fileNames[i], fileName);
+                if (itemFilesDictionary.ContainsKey(fileNames[i]))
+                    MessageBox.Show("同じファイルをインポートできませんでした。");
+                else
+                    itemFilesDictionary.Add(fileNames[i], fileName);
                 /*Array.Resize(ref filePaths, filePaths.Length + 1);
                 Array.Resize(ref files, files.Length + 1);
                 Array.Resize(ref fileExts, fileExts.Length + 1);
@@ -165,7 +168,12 @@ namespace FileManager4Broadcasting
         private void importButton_Click(object sender, EventArgs e)
         {
 
-            foreach (string s in listBox1.SelectedItems)
+            ImportSettingForm isf = new ImportSettingForm();
+            isf.filePaths = itemFilesDictionary.Keys.ToArray();
+            isf.ShowDialog();
+            //isf.ShowDialog();
+
+            /*foreach (string s in listBox1.SelectedItems)
             {
                 Dictionary<string, string> dic = new Dictionary<string, string>();
                 foreach (string s2 in itemFilesDictionary.Keys)
@@ -188,7 +196,7 @@ namespace FileManager4Broadcasting
             {
                 listBox2.Items.Add(importFilesDictionary[s]+"("+s+")");
             }
-            UpdateListBox();
+            UpdateListBox();*/
         }
 
         void ImportFiles()

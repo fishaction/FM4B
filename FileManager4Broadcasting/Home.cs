@@ -22,6 +22,7 @@ namespace FileManager4Broadcasting
         public Home()
         {
             InitializeComponent();
+            comboBox1.SelectedIndex = 0;
         }
 
         private void exitItem_Click(object sender, EventArgs e)
@@ -36,7 +37,7 @@ namespace FileManager4Broadcasting
             dff.projectName = "テスト";
             FilesAttribute fa = new FilesAttribute();
             fa.Number = 1;
-            fa.FileName = "テスト.mts";
+            fa.FileName = "テスト2.mts";
             fa.FilePath = @"C:\Users\Owner\Desktop\00073.MTS";
             fa.Description = "テストです。";
             fa.ResourceType = "Video";
@@ -243,6 +244,7 @@ namespace FileManager4Broadcasting
         {
             comboBox1.Items.Clear();
             comboBox1.Items.Add("(プロジェクトを選択してください)");
+            comboBox1.SelectedIndex = 0;
             List<ProjectInfo> projects = GetProjectInfos();
             if (projects == null)
                 return;
@@ -293,6 +295,7 @@ namespace FileManager4Broadcasting
         {
             listBox1.Items.Clear();
             List<FilesAttribute> filesAttributes = AddResource.GetFiles(comboBox1.Text);
+            
             foreach (FilesAttribute fa in filesAttributes)
             {
                 if (textBox2.Text!="")
@@ -322,6 +325,14 @@ namespace FileManager4Broadcasting
                     }
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ImportForm importForm = new ImportForm();
+            importForm.ShowDialog();
+            /*ImportSettingForm isf = new ImportSettingForm();
+            isf.ShowDialog();*/
         }
     }
 
