@@ -105,6 +105,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Win32.cs" />
     <EmbeddedResource Include="DupFilesForm.resx">
       <DependentUpon>DupFilesForm.cs</DependentUpon>

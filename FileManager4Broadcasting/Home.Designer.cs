@@ -39,11 +39,11 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.textBox2 = new FileManager4Broadcasting.TextBoxEx();
+            this.textBox1 = new FileManager4Broadcasting.TextBoxEx();
             this.menuStrip.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -70,25 +70,25 @@
             this.toolStripSeparator1,
             this.exitItem});
             this.fileMenu.Name = "fileMenu";
-            this.fileMenu.Size = new System.Drawing.Size(67, 24);
+            this.fileMenu.Size = new System.Drawing.Size(85, 24);
             this.fileMenu.Text = "ファイル(&F)";
             // 
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.newProjectToolStripMenuItem.Text = "新規(&N)";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(112, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(116, 6);
             // 
             // exitItem
             // 
             this.exitItem.Name = "exitItem";
-            this.exitItem.Size = new System.Drawing.Size(115, 22);
+            this.exitItem.Size = new System.Drawing.Size(119, 22);
             this.exitItem.Text = "終了(&X)";
             this.exitItem.Click += new System.EventHandler(this.exitItem_Click);
             // 
@@ -97,13 +97,13 @@
             this.toolMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionItem});
             this.toolMenu.Name = "toolMenu";
-            this.toolMenu.Size = new System.Drawing.Size(60, 24);
+            this.toolMenu.Size = new System.Drawing.Size(74, 24);
             this.toolMenu.Text = "ツール(&T)";
             // 
             // optionItem
             // 
             this.optionItem.Name = "optionItem";
-            this.optionItem.Size = new System.Drawing.Size(135, 22);
+            this.optionItem.Size = new System.Drawing.Size(155, 22);
             this.optionItem.Text = "オプション(&O)";
             this.optionItem.Click += new System.EventHandler(this.optionItem_Click);
             // 
@@ -135,10 +135,10 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.216425F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.109005F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.767773F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 77.25118F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 426);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
@@ -147,9 +147,9 @@
             this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox1.Font = new System.Drawing.Font("MS UI Gothic", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(5, 100);
+            this.listBox1.Location = new System.Drawing.Point(5, 104);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(790, 321);
+            this.listBox1.Size = new System.Drawing.Size(790, 317);
             this.listBox1.TabIndex = 2;
             this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
             // 
@@ -162,28 +162,12 @@
             this.tableLayoutPanel2.Controls.Add(this.textBox2, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.textBox1, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 35);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 37);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(790, 23);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(790, 26);
             this.tableLayoutPanel2.TabIndex = 3;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(398, 3);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(389, 19);
-            this.textBox2.TabIndex = 1;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(3, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(389, 19);
-            this.textBox1.TabIndex = 0;
             // 
             // tableLayoutPanel3
             // 
@@ -193,11 +177,11 @@
             this.tableLayoutPanel3.Controls.Add(this.button2, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.button1, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(615, 64);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(615, 69);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(180, 30);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(180, 29);
             this.tableLayoutPanel3.TabIndex = 4;
             // 
             // button2
@@ -206,7 +190,7 @@
             this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(3, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(84, 24);
+            this.button2.Size = new System.Drawing.Size(84, 23);
             this.button2.TabIndex = 1;
             this.button2.Text = "追加(&C)";
             this.button2.UseVisualStyleBackColor = true;
@@ -218,11 +202,29 @@
             this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(93, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 24);
+            this.button1.Size = new System.Drawing.Size(84, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "検索(&S)";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox2.Location = new System.Drawing.Point(398, 3);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Placeholder = "タグを入力(カンマ区切り)";
+            this.textBox2.Size = new System.Drawing.Size(389, 19);
+            this.textBox2.TabIndex = 3;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Location = new System.Drawing.Point(3, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Placeholder = "キーワードを入力";
+            this.textBox1.Size = new System.Drawing.Size(389, 19);
+            this.textBox1.TabIndex = 2;
             // 
             // Home
             // 
@@ -260,11 +262,11 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private TextBoxEx textBox1;
+        private TextBoxEx textBox2;
     }
 }
 

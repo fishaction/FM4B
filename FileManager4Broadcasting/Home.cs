@@ -43,6 +43,7 @@ namespace FileManager4Broadcasting
             {
                 Properties.Settings.Default.saveLocation = of.textBox1.Text;
                 string saveLocation = Properties.Settings.Default.saveLocation;
+                Properties.Settings.Default.Save();
                 if (Directory.Exists(saveLocation))
                 {
                     if (!Directory.Exists(saveLocation + @"\FM4B"))
@@ -181,6 +182,7 @@ namespace FileManager4Broadcasting
             }
             else
             {
+                Directory.CreateDirectory(saveLocation + @"\FM4B\プロジェクト");
                 StreamWriter sw = new StreamWriter(saveLocation + @"\FM4B\プロジェクト\projects.json",
                 false);
                 //汚いコードここから
@@ -335,7 +337,7 @@ namespace FileManager4Broadcasting
             isf.projectName = comboBox1.Text;
             isf.FormClosed += new FormClosedEventHandler(ISFColosed);
             isf.Show();
-            
+            Enabled = false;
 
             /*ImportSettingForm isf = new ImportSettingForm();
             isf.ShowDialog();*/
@@ -353,6 +355,7 @@ namespace FileManager4Broadcasting
                 dff.ShowDialog();
                 SetListBox();
             }
+            Enabled = true;
         }
     }
 

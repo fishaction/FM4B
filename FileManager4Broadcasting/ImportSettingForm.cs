@@ -137,6 +137,20 @@ namespace FileManager4Broadcasting
         {
             List<FilesAttribute> fas = AddResource.GetFiles(projectName);
             List<string> sList = new List<string>();
+            for (int i = 0; i<filesAttributes.Length; i++)
+            {
+                for(int i2 = 0; i2 < filesAttributes.Length; i2++)
+                {
+                    if (i != i2)
+                    {
+                        if (filesAttributes[i].FileName == filesAttributes[i2].FileName)
+                        {
+                            MessageBox.Show("ファイル名が同じです。変更してください。");
+                            break;
+                        }
+                    }
+                }
+            }
             if (fas == null)
             {
                 for (int i = 0; i < filesAttributes.Length; i++)
