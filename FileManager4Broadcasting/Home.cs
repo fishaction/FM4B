@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace FileManager4Broadcasting
 {
@@ -276,9 +275,46 @@ namespace FileManager4Broadcasting
                 return;
             }
             button1.Enabled = true;
+            List<string> tags = new List<string>();
             foreach (FilesAttribute fa in filesAttributes)
             {
                 listBox1.Items.Add(fa.FileName);
+                if (fa.Tags == null)
+                    return;
+                for (int i = 0;i < fa.Tags.Length;i++)
+                {
+                    tags.Add(fa.Tags[i]);
+                }
+            }
+            System.Collections.Generic.HashSet<string> hs1 =
+                new System.Collections.Generic.HashSet<string>(tags);
+            List<string> deTags = new List<string>();
+            foreach (string s in deTags)
+            {
+                MessageBox.Show(s);
+            }
+            foreach (string s in hs1)
+            {
+                deTags.Add(s);
+            }
+            Dictionary<string, int> tagDic = new Dictionary<string, int>();
+            for (int i = 0;i<deTags.Count;i++)
+            {
+                int count = 0;
+                for (int i2 = 0;i2<tags.Count;i2++)
+                {
+                    if (tags[i2] == deTags[i])
+                        count++;
+                }
+                tagDic.Add(deTags[i], count);
+            }
+            panel1.Controls.Clear();
+            for (int i = 0; i < tagDic.Count; i++)
+            {
+                LinkLabel ll = new LinkLabel();
+                ll.Dock = DockStyle.Left;
+                ll.Text = tagDic.ToArray()[i].Key;
+                panel1.Controls.Add(ll);
             }
         }
 
@@ -338,9 +374,6 @@ namespace FileManager4Broadcasting
             isf.FormClosed += new FormClosedEventHandler(ISFColosed);
             isf.Show();
             Enabled = false;
-
-            /*ImportSettingForm isf = new ImportSettingForm();
-            isf.ShowDialog();*/
         }
         private void ISFColosed(object sender,FormClosedEventArgs s)
         {
